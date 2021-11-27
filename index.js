@@ -20,6 +20,14 @@ app.get('/', (req, res) => {
       }
     `
   }).then((result) => {
+    if (req.query.q == "circ") {
+      return res.send(Number.parseFloat(result.data.data.protocolMetrics[0].ohmCirculatingSupply))
+    }
+
+    if (req.query.q == "total") {
+      return res.send(Number.parseFloat(result.data.data.protocolMetrics[0].totalSupply))
+    }
+
     res.json({
       totalSupply: Number.parseFloat(result.data.data.protocolMetrics[0].totalSupply),
       circSupply: Number.parseFloat(result.data.data.protocolMetrics[0].ohmCirculatingSupply),
